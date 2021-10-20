@@ -8,7 +8,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event) => {
