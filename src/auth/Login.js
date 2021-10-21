@@ -8,7 +8,6 @@ import {
   Button,
 } from "@material-ui/core";
 const cors_proxy = "https://thingproxy.freeboard.io/fetch/";
-
 const Login = () => {
   const [checked, setChecked] = React.useState(true);
   const [username, setUser] = React.useState();
