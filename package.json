@@ -28,8 +28,10 @@
     "@mui/icons-material": "^5.0.3",
     "@mui/material": "^5.0.3",
     "@types/react": "^17.0.27",
+    "axios": "^0.23.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-material-ui-form-validator": "^3.0.0",
     "react-router-dom": "^5.3.0",
     "recharts": "^2.1.5"
   },

@@ -1,40 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { loginRequest } from "../requests/login";
 import {
   Checkbox,
   Grid,
   TextField,
   FormControlLabel,
-  Paper,
   Button,
 } from "@material-ui/core";
-const cors_proxy = "https://thingproxy.freeboard.io/fetch/";
+
 const Login = () => {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState(true);
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  function logIn() {
-    let data = {
-      username: document.getElementById("user").value,
-      password: document.getElementById("pass").value,
-    };
-    const postReq = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    console.log(postReq);
-    fetch(cors_proxy + "http://46.101.243.193:3000/auth/login", postReq)
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginRequest({ username: username, password: password });
+  };
+
   return (
-    <div style={{ padding: 30 }}>
-      <Paper>
+    <form onSubmit={handleSubmit}>
+      <div style={{ padding: 30 }}>
         <Grid
           container
           spacing={3}
@@ -43,10 +33,19 @@ const Login = () => {
           alignItems={"center"}
         >
           <Grid item xs={12}>
-            <TextField id="user" label="Username"></TextField>
+            <TextField
+              label="Username"
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            ></TextField>
           </Grid>
           <Grid item xs={12}>
-            <TextField id="pass" label="Password" type={"password"}></TextField>
+            <TextField
+              label="Password"
+              type={"password"}
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            ></TextField>
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
@@ -62,14 +61,13 @@ const Login = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button fullWidth onClick={logIn}>
-              {" "}
-              Login{" "}
+            <Button fullWidth type="submit">
+              Login
             </Button>
           </Grid>
         </Grid>
-      </Paper>
-    </div>
+      </div>
+    </form>
   );
 };
 
