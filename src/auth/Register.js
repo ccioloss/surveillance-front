@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Grid, TextField, Paper, Button } from "@material-ui/core";
 const cors_proxy = "https://thingproxy.freeboard.io/fetch/";
-function postUser() {}
+
 const Register = () => {
   const [username, setUser] = React.useState();
   const [password, setPass] = React.useState();
