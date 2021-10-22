@@ -5,15 +5,18 @@ import { DevicesPage } from "./pages/DevicesPage";
 import RecordingsPage from "./pages/RecordingsPage";
 import SettingsPage from "./pages/SettingsPage";
 import Login from "./auth/Login";
-import Register from "./auth/Register";
+import Authentication from "./auth/Authentication";
+import Dashboard from "./dashboard/Dashboard";
+import DashboardPage from "./pages/DashboardPage";
+import Main from "./pages/Main";
 
 const App = () => {
   const [token, setToken] = useState();
 
   // if (!token) to see the login page
-  if (!token) {
+  if (token) {
     return (
-      <Register />
+      <Main />
       // <Login setToken={setToken} />
       //   <Authentication />
     );
@@ -21,7 +24,7 @@ const App = () => {
 
   return (
     <>
-      <Route exact path="/" component={Login} />
+      <Route exact path="/" component={DashboardPage} />
       <Route exact path="/recordings" component={RecordingsPage} />
       <Route exact path="/devices" component={DevicesPage} />
       <Route exact path="/settings" component={SettingsPage} />
