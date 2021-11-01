@@ -1,29 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@mui/material";
 import Register from "./Register";
 import Login from "./Login";
 
-const Authentication = () => {
-  const [page, setPage] = React.useState(true);
-  console.log(page);
+const Authentication = ({ setToken }) => {
+  const [page, setPage] = useState(true);
+
+  const changePage = () => {
+    setPage(!page);
+  };
+
   return (
     <div>
-      <Button
-        onClick={() => {
-          setPage(true);
-        }}
-      >
-        Log In{" "}
-      </Button>
-      <Button
-        onClick={() => {
-          setPage(false);
-        }}
-      >
-        Register{" "}
-      </Button>
-      {page && <Login />}
-      {!page && <Register />}
+      <Button onClick={changePage}>Log In </Button>
+      <Button onClick={changePage}>Register</Button>
+      {page ? <Login setToken={setToken} /> : <Register />}
     </div>
   );
 };

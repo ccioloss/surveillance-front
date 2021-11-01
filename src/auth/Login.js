@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { loginRequest } from "../requests/login";
 import {
   Checkbox,
   Grid,
@@ -7,8 +6,10 @@ import {
   FormControlLabel,
   Button,
 } from "@material-ui/core";
+import AuthService from "../services/auth-service";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const [checked, setChecked] = useState(true);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -17,9 +18,10 @@ const Login = () => {
     setChecked(event.target.checked);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginRequest({ username: username, password: password });
+    const token = await AuthService.login(username, password);
+    await setToken(token);
   };
 
   return (
@@ -69,6 +71,10 @@ const Login = () => {
       </div>
     </form>
   );
+};
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
 };
 
 export default Login;

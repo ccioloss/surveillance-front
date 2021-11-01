@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
-import { registerRequest } from "../requests/register";
+import AuthService from "../services/auth-service";
 
 const Register = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [rpassword, setrPassword] = useState();
 
-  const handleSubmit = (e) => {
-    if (password !== rpassword) alert("Passwords don't match!");
-    else {
+  const handleSubmit = async (e) => {
+    if (password === rpassword && password) {
       e.preventDefault();
-      registerRequest({ username: username, password: password });
-    }
+      await AuthService.register(username, password);
+    } else alert("Passwords don't match!");
   };
 
   return (
