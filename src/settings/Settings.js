@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Grid, Button } from "@mui/material";
-import { padding } from "@mui/system";
+import { changePassword } from "../requests/passwordChange";
+import { changeUsername } from "../requests/usernameChange";
 
 const Settings = () => {
   const [password1, setPassword1] = useState();
@@ -9,15 +10,23 @@ const Settings = () => {
   const [password2, setPassword2] = useState();
   const [newUsername, setNewUsername] = useState();
 
+  const handleUsernameChange = (e) => {
+    e.preventDefault();
+    changeUsername({ newusername: newUsername });
+  };
+
+  const handlePassChange = (e) => {
+    e.preventDefault();
+    changePassword({ newpassword: newPassword });
+  };
+
+  //   direction={"column"}
+  // justify={"center"}
+  // alignItems={"center"}
+
   return (
     <div style={{ padding: 30 }}>
-      <Grid
-        container
-        spacing={3}
-        direction={"column"}
-        justify={"center"}
-        alignItems={"center"}
-      >
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
             label="Old Password"
@@ -35,11 +44,10 @@ const Settings = () => {
           ></TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button fullWidth type="submit">
+          <Button type="submit" onClick={(e) => handlePassChange(e)}>
             Change Password
           </Button>
         </Grid>
-
         <Grid item xs={12}>
           <TextField
             label="New Username"
@@ -57,7 +65,7 @@ const Settings = () => {
           ></TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button fullWidth type="submit">
+          <Button type="submit" onClick={(e) => handleUsernameChange(e)}>
             Change Username
           </Button>
         </Grid>
