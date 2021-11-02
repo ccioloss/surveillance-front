@@ -1,34 +1,26 @@
-import { StrictMode, useState } from "react";
+import { StrictMode } from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import { DevicesPage } from "./pages/DevicesPage";
 import RecordingsPage from "./pages/RecordingsPage";
 import SettingsPage from "./pages/SettingsPage";
-import Login from "./auth/Login";
-import Authentication from "./auth/Authentication";
-import Dashboard from "./dashboard/Dashboard";
 import DashboardPage from "./pages/DashboardPage";
-import Main from "./pages/Main";
-
+import useToken from "./auth/useToken";
+import Authentication from "./auth/Authentication";
 const App = () => {
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
 
-  // if (!token) to see the login page
-  if (token) {
-    return (
-      <Main />
-      // <Login setToken={setToken} />
-      //   <Authentication />
-    );
+  if (!token) {
+    return <Authentication setToken={setToken} />;
   }
 
   return (
-    <>
+    <div>
       <Route exact path="/" component={DashboardPage} />
       <Route exact path="/recordings" component={RecordingsPage} />
       <Route exact path="/devices" component={DevicesPage} />
       <Route exact path="/settings" component={SettingsPage} />
-    </>
+    </div>
   );
 };
 

@@ -5,7 +5,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -14,8 +13,8 @@ import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../dashboard/listItems";
-
+import AuthService from "../services/auth-service";
+import MenuListItems from "../dashboard/listItems";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -107,7 +106,13 @@ function DashboardContent(props) {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                AuthService.logout();
+                window.location.href = "/";
+              }}
+            >
               <LogoutIcon />
             </IconButton>
           </Toolbar>
@@ -126,7 +131,10 @@ function DashboardContent(props) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List>{mainListItems}</List>
+
+          {/* Icons */}
+          <MenuListItems />
+
           <Divider />
         </Drawer>
         <Box
@@ -150,6 +158,5 @@ function DashboardContent(props) {
 }
 
 export default function Main(props) {
-  console.log(props.subpageContent);
   return <DashboardContent content={props.subpageContent} />;
 }
