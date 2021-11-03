@@ -7,7 +7,7 @@ const headers = {
 
 export const changePassword = ({ newpassword }) => {
   const data = {
-    newpassword: newpassword,
+    password: newpassword,
   };
 
   axios

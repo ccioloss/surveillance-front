@@ -12,17 +12,13 @@ const Settings = () => {
 
   const handleUsernameChange = (e) => {
     e.preventDefault();
-    changeUsername({ newusername: newUsername });
+    changeUsername({ username: newUsername });
   };
 
   const handlePassChange = (e) => {
     e.preventDefault();
-    changePassword({ newpassword: newPassword });
+    changePassword({ password: newPassword });
   };
-
-  //   direction={"column"}
-  // justify={"center"}
-  // alignItems={"center"}
 
   return (
     <div style={{ padding: 30 }}>

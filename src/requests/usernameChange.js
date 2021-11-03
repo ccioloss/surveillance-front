@@ -7,7 +7,7 @@ const headers = {
 
 export const changeUsername = ({ newusername }) => {
   const data = {
-    newusername: newusername,
+    username: newusername,
   };
 
   axios
