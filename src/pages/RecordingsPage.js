@@ -1,8 +1,9 @@
 import React from "react";
 import Main from "./Main";
+import RecordingsList from "../recordings/RecordingsList";
 
 const RecordingsPage = () => {
-  return <Main subpageContent={<div>No recordings available.</div>}></Main>;
+  return <Main subpageContent={<RecordingsList />}></Main>;
 };
 
 export default RecordingsPage;
