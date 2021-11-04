@@ -40,5 +40,74 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem("token"));
   }
+
+  changePassword(newpassword) {
+    const data = {
+      newpassword: newpassword,
+    };
+
+    return axios
+      .patch(cors_proxy + API_URL + "account/update ", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        return true;
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return error.message;
+      });
+  }
+
+  changeUsername(newusername) {
+    const data = {
+      newusername: newusername,
+    };
+
+    return axios
+      .patch(cors_proxy + API_URL + "account/update ", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        return true;
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return error.message;
+      });
+  }
+
+  deleteAccount(password) {
+    const data = {
+      password: password,
+    };
+    return axios
+      .delete(cors_proxy + API_URL + "account/delete", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+        },
+        data,
+      })
+      .then((response) => {
+        console.log(response.data);
+        return true;
+      })
+      .catch((error) => {
+        console.log("error");
+        return error.message;
+      });
+  }
 }
 export default new AuthService();
