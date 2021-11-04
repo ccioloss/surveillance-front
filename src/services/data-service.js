@@ -3,14 +3,13 @@ import axios from "axios";
 const API_URL = "http://46.101.243.193:3000/";
 const cors_proxy = "https://thingproxy.freeboard.io/fetch/";
 
-const headers = {
-  "Content-Type": "application/json",
-  Authorization:
-    "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
-};
-
 class DataService {
   getRecordingList(page) {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+    };
     return axios
       .get(cors_proxy + API_URL + `storage/uploads-links?page=${page}`, {
         headers: headers,
@@ -24,6 +23,11 @@ class DataService {
   }
 
   getDeviceToken() {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+    };
     return axios
       .get(cors_proxy + API_URL + `device/token`, {
         headers: headers,
@@ -37,6 +41,11 @@ class DataService {
   }
 
   deleteDeviceToken() {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+    };
     return axios
       .get(cors_proxy + API_URL + `device/delete-token`, {
         headers: headers,
@@ -51,6 +60,11 @@ class DataService {
   }
 
   generateDeviceToken() {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+    };
     return axios
       .get(cors_proxy + API_URL + `device/generate-token`, {
         headers: headers,
