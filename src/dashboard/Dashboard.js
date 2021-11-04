@@ -48,9 +48,7 @@ const Dashboard = () => {
               flexDirection: "column",
               height: 240,
             }}
-          >
-            <Devices />
-          </Paper>
+          ></Paper>
         </Grid>
         {/* Recent Recordings */}
         <Grid item xs={12}>

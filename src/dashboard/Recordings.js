@@ -13,9 +13,7 @@ function createData(id, date, time, length) {
 
 const rows = [
   createData(0, "16 Mar, 2019", "18:01:58", "17s"),
-  createData(0, "16 Mar, 2019", "18:01:58", "17s"),
-  createData(0, "16 Mar, 2019", "18:01:58", "17s"),
-  createData(0, "16 Mar, 2019", "18:01:58", "17s"),
+  createData(1, "16 Mar, 2019", "18:01:58", "17s"),
 ];
 
 function preventDefault(event) {
@@ -28,7 +26,7 @@ export default function Recordings() {
       <Title>Recent Recordings</Title>
       <Table size="small">
         <TableHead>
-          <TableRow>
+          <TableRow key={0}>
             <TableCell>Date</TableCell>
             <TableCell>Time</TableCell>
             <TableCell>Length</TableCell>
