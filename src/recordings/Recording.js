@@ -28,7 +28,6 @@ const Recording = ({ url, name, timestamp, handleDelete, id }) => {
           </Typography>
         </CardContent>
         <CardActions style={{ width: "100%", justifyContent: "flex-end" }}>
-          <Button size="small">Share</Button>
           <Button
             size="small"
             variant="outlined"
