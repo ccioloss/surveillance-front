@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
 import AuthService from "../services/auth-service";
+import { AlertTitle, Alert } from "@material-ui/lab";
 
 const Register = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [rpassword, setrPassword] = useState();
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     if (password === rpassword && password) {
       e.preventDefault();
-      await AuthService.register(username, password);
+      setError(await AuthService.register(username, password));
     } else alert("Passwords don't match!");
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div style={{ padding: 30 }}>
+        {error ? (
+          <Alert severity="error">
+            <AlertTitle>Registration failed</AlertTitle>
+            Username is already taken. Please choose another one.
+          </Alert>
+        ) : (
+          <></>
+        )}
         <Grid
           container
           spacing={3}

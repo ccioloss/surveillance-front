@@ -8,11 +8,13 @@ import {
 } from "@material-ui/core";
 import AuthService from "../services/auth-service";
 import PropTypes from "prop-types";
+import { AlertTitle, Alert } from "@material-ui/lab";
 
 const Login = ({ setToken }) => {
   const [checked, setChecked] = useState(true);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -21,12 +23,22 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await AuthService.login(username, password);
+    if (!token) {
+      setError(true);
+    }
     await setToken(token);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div style={{ padding: 30 }}>
+        {error ? (
+          <Alert severity="error">
+            <AlertTitle>Login fail</AlertTitle>
+            Please check your username or password and try again.
+          </Alert>
+        ) : (
+          <></>
+        )}
         <Grid
           container
           spacing={3}

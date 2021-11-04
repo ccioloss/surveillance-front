@@ -23,6 +23,9 @@ class AuthService {
         }
         console.log("tok1: " + response.data.jwt);
         return response.data.jwt;
+      })
+      .catch((error) => {
+        return false;
       });
   }
 
@@ -31,10 +34,17 @@ class AuthService {
   }
 
   register(username, password) {
-    return axios.post(cors_proxy + API_URL + "auth/register", {
-      username,
-      password,
-    });
+    return axios
+      .post(cors_proxy + API_URL + "auth/register", {
+        username,
+        password,
+      })
+      .then((response) => {
+        return false;
+      })
+      .catch((error) => {
+        return true;
+      });
   }
 
   getCurrentUser() {
