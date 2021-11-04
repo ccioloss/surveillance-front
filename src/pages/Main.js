@@ -101,7 +101,7 @@ function DashboardContent(props) {
               Dashboard | <b>Survaillance System</b>
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={69} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
