@@ -10,7 +10,11 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Recording = ({ url, name, timestamp }) => {
+const Recording = ({ url, name, timestamp, handleDelete, id }) => {
+  const deleteRecording = () => {
+    handleDelete(id);
+  };
+
   return (
     <Grid item xs={12} sm={6} md={4} padding={2}>
       <Card sx={{ maxWidth: 345 }} variant="outlined">
@@ -24,12 +28,12 @@ const Recording = ({ url, name, timestamp }) => {
           </Typography>
         </CardContent>
         <CardActions style={{ width: "100%", justifyContent: "flex-end" }}>
-          <Button size="small">Share</Button>
           <Button
             size="small"
             variant="outlined"
             color="error"
             startIcon={<DeleteIcon />}
+            onClick={deleteRecording}
           >
             Delete
           </Button>

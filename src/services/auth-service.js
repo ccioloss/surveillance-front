@@ -19,9 +19,8 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.jwt) {
-          localStorage.setItem("token", JSON.stringify(response.data.jwt));
+          localStorage.setItem("token", response.data.jwt);
         }
-        console.log("tok1: " + response.data.jwt);
         return response.data.jwt;
       })
       .catch((error) => {

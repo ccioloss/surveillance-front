@@ -22,6 +22,24 @@ class DataService {
       });
   }
 
+  deleteRecording(id) {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+    };
+    return axios
+      .delete(cors_proxy + API_URL + `storage/upload/:${id}`, {
+        headers: headers,
+      })
+      .then((response) => {
+        return true;
+      })
+      .catch((error) => {
+        return error.message;
+      });
+  }
+
   getDeviceToken() {
     const headers = {
       "Content-Type": "application/json",
