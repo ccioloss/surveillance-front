@@ -26,7 +26,6 @@ const Device = () => {
 
   const deleteToken = async () => {
     const res = await DataService.deleteDeviceToken();
-    console.log(await res);
     if (res === true) {
       setDeviceToken("");
       alert("device token deleted!");
@@ -40,11 +39,9 @@ const Device = () => {
 
   useEffect(async () => {
     const res = await DataService.getDeviceToken();
-    console.log(res.deviceToken);
     if (res.deviceToken) {
       setDeviceToken(res.deviceToken);
     } else {
-      alert(res);
       setDeviceToken("");
     }
   }, []);
