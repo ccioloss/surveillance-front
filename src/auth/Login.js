@@ -31,23 +31,24 @@ const Login = ({ setToken }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div style={{ padding: 30 }}>
-        {error ? (
-          <Alert severity="error">
-            <AlertTitle>Login fail</AlertTitle>
-            Please check your username or password and try again.
-          </Alert>
-        ) : (
-          <></>
-        )}
         <Grid
           container
           spacing={3}
           direction={"column"}
-          justify={"center"}
+          justifyContent={"center"}
           alignItems={"center"}
         >
+          {error ? (
+            <Alert severity="error">
+              <AlertTitle>Login fail</AlertTitle>
+              Please check your username or password and try again.
+            </Alert>
+          ) : (
+            <></>
+          )}
           <Grid item xs={12}>
             <TextField
+              style={{ width: "100" }}
               label="Username"
               required
               onChange={(e) => setUsername(e.target.value)}
@@ -75,8 +76,8 @@ const Login = ({ setToken }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button fullWidth type="submit">
-              Login
+            <Button variant="outlined" fullWidth type="submit">
+              Enter
             </Button>
           </Grid>
         </Grid>
