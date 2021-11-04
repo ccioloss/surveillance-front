@@ -9,6 +9,13 @@ const RecordingsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageData, setPageData] = useState([]);
 
+  const handleDelete = async (id) => {
+    const res = await DataService.deleteRecording(id);
+    if (res === true) {
+      getPageData();
+    }
+  };
+
   const getPageData = async () => {
     const res = await DataService.getRecordingList(currentPage);
     setPages(res.totalPages);
@@ -29,19 +36,11 @@ const RecordingsList = () => {
               timestamp={recording.timestamp}
               name={"Recording " + recording.id}
               key={recording.id}
+              id={recording.id}
+              handleDelete={handleDelete}
             />
           );
         })}
-        {/* <Grid
-        item
-        xs={6}
-        style={{ backgroundColor: "blue", height: "250px" }}
-      ></Grid>
-      <Grid
-        item
-        xs={6}
-        style={{ backgroundColor: "grey", height: "250px" }}
-      ></Grid> */}
       </Grid>
       <Pagination
         count={pages}
@@ -52,7 +51,6 @@ const RecordingsList = () => {
         }}
         onChange={(e, page) => {
           setCurrentPage(page);
-          console.log(currentPage);
         }}
       />
     </>
