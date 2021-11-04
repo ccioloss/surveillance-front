@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
 import AuthService from "../services/auth-service";
 
 const Register = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [rpassword, setrPassword] = useState();
+  const [success, setSuccess] = useState(false);
   var regularExpression = new RegExp("^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,}$");
   const [errors, setErrors] = useState({
     username: "",
@@ -15,12 +17,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSuccess(false);
     if (!validateFields(e)) {
       if (await AuthService.register(username, password)) {
         setErrors((state) => ({
           ...state,
           username: "Username taken",
         }));
+      } else {
+        setSuccess(true);
       }
     }
   };
@@ -61,6 +66,14 @@ const Register = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
+          {success ? (
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              Account successfully created
+            </Alert>
+          ) : (
+            <></>
+          )}
           <Grid item xs={12}>
             <TextField
               label="Username"
