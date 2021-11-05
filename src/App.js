@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import { DevicesPage } from "./pages/DevicesPage";
@@ -9,6 +9,7 @@ import useToken from "./auth/useToken";
 import Authentication from "./auth/Authentication";
 const App = () => {
   const { token, setToken } = useToken();
+  const [fst, setFst] = useState(false);
 
   if (!token) {
     return <Authentication setToken={setToken} />;
