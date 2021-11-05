@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,23 +6,37 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
+import AuthService from "../services/data-service";
+import { useState } from "react";
 
-function createData(id, date, time, length) {
+const createData = (id, date, time, length) => {
   return { id, date, time, length };
-}
+};
 
-const rows = [
-  createData(0, "16 Mar, 2019", "18:01:58", "17s"),
-  createData(1, "16 Mar, 2019", "18:01:58", "17s"),
+let rows = [
+  createData(0, "2021-11-04", "18:01:58", "5s"),
+  createData(1, "2021-11-04", "18:03:45", "5s"),
 ];
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+const Recordings = () => {
+  // TO DO: fetch recordings list
+  // use momentjs to parse times
 
-export default function Recordings() {
+  // useEffect(async () => {
+  //   const res = await AuthService.getRecordingList();
+  //   rows = res.data.map((obj) =>
+  //     createData(
+  //       obj.id,
+  //       Date.parse(obj.timestamp).format("YYYY-MM-DD"),
+  //       Date.parse(obj.timestamp).format("YYYY-MM-DD").toHHMMSS(),
+  //       "5s"
+  //     )
+  //   );
+  //   console.log(rows);
+  // });
+
   return (
-    <React.Fragment>
+    <>
       <Title>Recent Recordings</Title>
       <Table size="small">
         <TableHead>
@@ -42,9 +56,11 @@ export default function Recordings() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+      <Link color="primary" href="recordings" sx={{ mt: 3 }}>
         See more recordings
       </Link>
-    </React.Fragment>
+    </>
   );
-}
+};
+
+export default Recordings;
