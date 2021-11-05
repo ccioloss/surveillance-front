@@ -8,13 +8,17 @@ import {
 } from "@material-ui/core";
 import AuthService from "../services/auth-service";
 import PropTypes from "prop-types";
-import { AlertTitle, Alert } from "@material-ui/lab";
+import AlertService from "../services/alert-service";
 
 const Login = ({ setToken }) => {
   const [checked, setChecked] = useState(true);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState(false);
+  const [status, setStatus] = useState({
+    type: "",
+    message: "",
+    success: Boolean,
+  });
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -22,9 +26,20 @@ const Login = ({ setToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus((state) => ({
+      ...state,
+      type: "",
+      message: "",
+      success: Boolean,
+    }));
     const token = await AuthService.login(username, password);
     if (!token) {
-      setError(true);
+      setStatus((state) => ({
+        ...state,
+        type: "auth",
+        message: "login",
+        success: false,
+      }));
     }
     await setToken(token);
   };
@@ -38,14 +53,8 @@ const Login = ({ setToken }) => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          {error ? (
-            <Alert severity="error">
-              <AlertTitle>Login fail</AlertTitle>
-              Please check your username or password and try again.
-            </Alert>
-          ) : (
-            <></>
-          )}
+          <AlertService delay="5000" data={status} />
+
           <Grid item xs={12}>
             <TextField
               style={{ width: "100" }}

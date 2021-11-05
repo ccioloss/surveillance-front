@@ -19,7 +19,7 @@ const Settings = () => {
         </Grid>
         <Grid item>
           <Typography color="gray" variant="h6">
-            Change your password
+            Change your username
           </Typography>
         </Grid>
         <Grid item>

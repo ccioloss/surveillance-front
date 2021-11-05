@@ -64,12 +64,10 @@ class AuthService {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        return true;
+        return false;
       })
       .catch((error) => {
-        console.log(error.message);
-        return error.message;
+        return true;
       });
   }
 
@@ -87,12 +85,11 @@ class AuthService {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        return true;
+        console.log(response);
+        return false;
       })
       .catch((error) => {
-        console.log(error.message);
-        return error.message;
+        return true;
       });
   }
 
@@ -110,11 +107,9 @@ class AuthService {
         data,
       })
       .then((response) => {
-        console.log(response.data);
         return true;
       })
       .catch((error) => {
-        console.log("error");
         return error.message;
       });
   }
