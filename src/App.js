@@ -15,10 +15,10 @@ const App = () => {
 
   return (
     <div>
-      <Route exact path="/" component={DashboardPage} />
-      <Route exact path="/recordings" component={RecordingsPage} />
-      <Route exact path="/devices" component={DevicesPage} />
-      <Route exact path="/settings" component={SettingsPage} />
+      <Route exact path="/" render={DashboardPage} />
+      <Route exact path="/recordings" render={RecordingsPage} />
+      <Route exact path="/devices" render={DevicesPage} />
+      <Route exact path="/settings" render={SettingsPage} />
     </div>
   );
 };
