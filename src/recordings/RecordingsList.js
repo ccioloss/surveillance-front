@@ -1,14 +1,27 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Grid } from "@mui/material";
+import {
+  Grid,
+  Pagination,
+  Card,
+  CardContent,
+  CardActions,
+  TextField,
+  Button,
+} from "@mui/material";
 import Recording from "./Recording";
-import { Pagination } from "@mui/material";
 import DataService from "../services/data-service";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 const RecordingsList = () => {
+  const now = new Date().getTime();
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageData, setPageData] = useState([]);
   const [load, setLoad] = useState(false);
+  const [startDate, setStartDate] = useState(now - 24 * 60 * 60);
+  const [endDate, setEndDate] = useState(now);
   const ws = useRef(null);
 
   const handleDelete = async (id) => {
@@ -20,6 +33,12 @@ const RecordingsList = () => {
 
   const getPageData = async () => {
     const res = await DataService.getRecordingList(currentPage);
+    setPages(res.totalPages);
+    setPageData([...res.data]);
+  };
+
+  const getFilteredData = async () => {
+    const res = await DataService.filterRecordings(startDate, endDate);
     setPages(res.totalPages);
     setPageData([...res.data]);
   };
@@ -58,6 +77,39 @@ const RecordingsList = () => {
   return (
     <>
       <Grid container padding={2}>
+        {/* Filter */}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Grid item xs={12} sm={6} md={4} padding={2}>
+            <Card sx={{ maxWidth: 345 }} variant="outlined">
+              <CardContent>
+                <DateTimePicker
+                  label="Start date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(new Date(e).getTime())}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <DateTimePicker
+                  label="End date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(new Date(e).getTime())}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </CardContent>
+              <CardActions
+                style={{ width: "100%", justifyContent: "flex-end" }}
+              >
+                <Button
+                  size="small"
+                  variant="outlined"
+                  onClick={getFilteredData}
+                >
+                  Filter
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </LocalizationProvider>
+        {/* Recordings */}
         {pageData.map((recording) => {
           return (
             <Recording
