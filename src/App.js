@@ -9,8 +9,6 @@ import useToken from "./auth/useToken";
 import Authentication from "./auth/Authentication";
 const App = () => {
   const { token, setToken } = useToken();
-  const [fst, setFst] = useState(false);
-
   if (!token) {
     return <Authentication setToken={setToken} />;
   }
