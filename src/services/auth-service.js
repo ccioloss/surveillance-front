@@ -73,7 +73,7 @@ class AuthService {
 
   changeUsername(newusername) {
     const data = {
-      newusername: newusername,
+      username: newusername,
     };
 
     return axios

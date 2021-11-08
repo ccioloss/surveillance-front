@@ -29,7 +29,7 @@ class DataService {
         "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
     };
     return axios
-      .delete(cors_proxy + API_URL + `storage/upload/:${id}`, {
+      .delete(cors_proxy + API_URL + `storage/upload/${id}`, {
         headers: headers,
       })
       .then((response) => {
