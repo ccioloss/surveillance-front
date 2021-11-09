@@ -6,35 +6,8 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-import AuthService from "../services/data-service";
-import { useState } from "react";
 
-const createData = (id, date, time, length) => {
-  return { id, date, time, length };
-};
-
-let rows = [
-  createData(0, "2021-11-04", "18:01:58", "5s"),
-  createData(1, "2021-11-04", "18:03:45", "5s"),
-];
-
-const Recordings = () => {
-  // TO DO: fetch recordings list
-  // use momentjs to parse times
-
-  // useEffect(async () => {
-  //   const res = await AuthService.getRecordingList();
-  //   rows = res.data.map((obj) =>
-  //     createData(
-  //       obj.id,
-  //       Date.parse(obj.timestamp).format("YYYY-MM-DD"),
-  //       Date.parse(obj.timestamp).format("YYYY-MM-DD").toHHMMSS(),
-  //       "5s"
-  //     )
-  //   );
-  //   console.log(rows);
-  // });
-
+const Recordings = ({ data }) => {
   return (
     <>
       <Title>Recent Recordings</Title>
@@ -47,11 +20,11 @@ const Recordings = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.time}</TableCell>
-              <TableCell>{row.length}</TableCell>
+          {data.map((data) => (
+            <TableRow key={data.id}>
+              <TableCell>{data.date}</TableCell>
+              <TableCell>{data.time}</TableCell>
+              <TableCell>{data.length}</TableCell>
             </TableRow>
           ))}
         </TableBody>
