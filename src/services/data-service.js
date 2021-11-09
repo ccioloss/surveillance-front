@@ -125,6 +125,29 @@ class DataService {
         return error.message;
       });
   }
+
+  filterRecordings(start, end) {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " + localStorage.getItem("token").replace(/['"]+/g, ""), // remove " " from the token
+    };
+    return axios
+      .get(
+        cors_proxy +
+          API_URL +
+          `storage/uploads-links?start=${start}&end=${end}`,
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {
+        return {
+          data: response.data.data,
+          totalPages: response.data.totalPages,
+        };
+      });
+  }
 }
 
 export default new DataService();

@@ -9,6 +9,7 @@ import {
   Grid,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import moment from "moment";
 
 const Recording = ({ url, name, timestamp, handleDelete, id }) => {
   const deleteRecording = () => {
@@ -24,7 +25,7 @@ const Recording = ({ url, name, timestamp, handleDelete, id }) => {
             {name}
           </Typography>
           <Typography variant="h6" color="text.secondary">
-            {timestamp}
+            {moment.utc(timestamp).local().format("DD.MM.YYYY HH:mm")}
           </Typography>
         </CardContent>
         <CardActions style={{ width: "100%", justifyContent: "flex-end" }}>
