@@ -3,7 +3,7 @@ import {
   Grid,
   Pagination,
   Card,
-  CardContent,
+  Stack,
   CardActions,
   TextField,
   Button,
@@ -81,7 +81,7 @@ const RecordingsList = () => {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Grid item xs={12} sm={6} md={4} padding={2}>
             <Card sx={{ maxWidth: 345 }} variant="outlined">
-              <CardContent>
+              <Stack spacing={2} paddingTop={3}>
                 <DateTimePicker
                   label="Start date"
                   value={startDate}
@@ -94,7 +94,7 @@ const RecordingsList = () => {
                   onChange={(e) => setEndDate(new Date(e).getTime())}
                   renderInput={(params) => <TextField {...params} />}
                 />
-              </CardContent>
+              </Stack>
               <CardActions
                 style={{ width: "100%", justifyContent: "flex-end" }}
               >
